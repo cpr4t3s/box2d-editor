@@ -211,13 +211,14 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
 		@Override
 		public void propertyChanged(Object source, String propertyName) {
 			RigidBodyModel model = Ctx.bodies.getSelectedModel();
-			renameBtn.setEnabled(model != null);
-			deleteBtn.setEnabled(model != null);
-			upBtn.setEnabled(model != null);
-			downBtn.setEnabled(model != null);
+			boolean pred = model != null;
+			renameBtn.setEnabled(pred);
+			deleteBtn.setEnabled(pred);
+			upBtn.setEnabled(pred);
+			downBtn.setEnabled(pred);
 
 			list.removeListSelectionListener(listSelectionListener);
-			if (model != null) list.setSelectedValue(model, true);
+			if (pred) list.setSelectedValue(model, true);
 			else list.clearSelection();
 			list.addListSelectionListener(listSelectionListener);
 		}
@@ -227,7 +228,7 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			if (e.getValueIsAdjusting()) return;
-			Ctx.bodies.select((RigidBodyModel) list.getSelectedValue());
+			Ctx.bodies.selectMultiple((List<RigidBodyModel>) list.getSelectedValuesList());
 		}
 	};
 

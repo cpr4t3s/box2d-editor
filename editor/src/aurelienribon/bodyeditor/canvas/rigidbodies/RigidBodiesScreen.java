@@ -349,7 +349,9 @@ public class RigidBodiesScreen {
 		}
 		canvas.batch.end();
 
-		canvas.drawer.drawModel(Ctx.bodies.getSelectedModel(), selectedPoints, nextPoint, nearestPoint);
+		for(RigidBodyModel rb : Ctx.bodies.getSelectedModels()) {
+			canvas.drawer.drawModel(rb, selectedPoints, nextPoint, nearestPoint);
+		}
 		canvas.drawer.drawGrid();
 		canvas.drawer.drawMouseSelection(mouseSelectionP1, mouseSelectionP2);
 		drawer.drawBallThrowPath(ballThrowP1, ballThrowP2);
