@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="editor/src"/>
+	<classpathentry kind="src" path="loader-libgdx-demo/src"/>
+	<classpathentry kind="src" path="loader-libgdx/src"/>
+	<classpathentry kind="lib" path="editor/libs/balloontip-1.2.1-sources.jar"/>
+	<classpathentry kind="lib" path="editor/libs/balloontip-1.2.1.jar"/>
+	<classpathentry kind="lib" path="editor/libs/commons-io-2.1-sources.jar"/>
+	<classpathentry kind="lib" path="editor/libs/commons-io-2.1.jar"/>
+	<classpathentry kind="lib" path="editor/libs/css-engine-swing-api-sources.jar"/>
+	<classpathentry kind="lib" path="editor/libs/css-engine-swing-api.jar"/>
+	<classpathentry kind="lib" path="editor/libs/gdx-backend-lwjgl-natives.jar"/>
+	<classpathentry kind="lib" path="editor/libs/gdx-backend-lwjgl-sources.jar"/>
+	<classpathentry kind="lib" path="editor/libs/gdx-backend-lwjgl.jar"/>
+	<classpathentry kind="lib" path="editor/libs/gdx-natives.jar"/>
+	<classpathentry kind="lib" path="editor/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="editor/libs/gdx.jar"/>
+	<classpathentry kind="lib" path="editor/libs/json-sources.jar"/>
+	<classpathentry kind="lib" path="editor/libs/json.jar"/>
+	<classpathentry kind="lib" path="editor/libs/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="editor/libs/tween-engine-api.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx-demo/libs/gdx-backend-lwjgl-natives.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx-demo/libs/gdx-backend-lwjgl-sources.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx-demo/libs/gdx-backend-lwjgl.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx-demo/libs/gdx-natives.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx-demo/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx-demo/libs/gdx.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx-demo/libs/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx-demo/libs/tween-engine-api.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="loader-libgdx/libs/gdx.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
