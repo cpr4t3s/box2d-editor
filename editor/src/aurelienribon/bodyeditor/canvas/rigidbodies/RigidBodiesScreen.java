@@ -395,7 +395,7 @@ public class RigidBodiesScreen {
 
 				if (selectedPoints.contains(p1) && selectedPoints.contains(p2)) {
 					Vector2 p = new Vector2((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
-					vs.add(i+1, p);
+					shape.addVertex(i+1, p);
 					toAdd.add(p);
 				}
 			}
@@ -416,7 +416,8 @@ public class RigidBodiesScreen {
 			switch (shape.getType()) {
 				case POLYGON:
 					for (Vector2 p : selectedPoints) {
-						if (shape.getVertices().contains(p)) shape.getVertices().remove(p);
+						if (shape.containVertex(p))
+							shape.removeVertex(p);
 					}
 					if (shape.getVertices().isEmpty()) shapes.remove(i);
 					break;

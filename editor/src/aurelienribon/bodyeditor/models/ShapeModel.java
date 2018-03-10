@@ -1,6 +1,9 @@
 package aurelienribon.bodyeditor.models;
 
 import com.badlogic.gdx.math.Vector2;
+
+import sun.security.provider.certpath.Vertex;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,42 @@ public class ShapeModel {
 	
 	public List<Vector2> getVertices() {
 		return detailVerticesToVertices();
+	}
+	
+	public void addVertex(int index, Vector2 element) {
+		vertices.add(
+				index,
+				new ShapeVertice(
+						element,
+						null,
+						null,
+						null
+				)
+		);
+	}
+	
+	public boolean containVertex(Vector2 vertex) {
+		for(ShapeVertice dVertice : vertices) {
+			if(dVertice.vertex.equals(vertex)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public void removeVertex(Vector2 vertex) {
+		List<ShapeVertice> toRemove = new ArrayList<>();
+		
+		for(ShapeVertice dVertice : vertices) {
+			if(dVertice.vertex.equals(vertex)) {
+				toRemove.add(dVertice);
+			}
+		}
+		
+		for(ShapeVertice dVertice : toRemove) {
+			vertices.remove(dVertice);
+		}
 	}
 
 	public Type getType() {
