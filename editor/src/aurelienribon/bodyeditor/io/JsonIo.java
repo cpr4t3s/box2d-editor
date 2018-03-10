@@ -6,7 +6,12 @@ import aurelienribon.bodyeditor.models.DynamicObjectModel;
 import aurelienribon.bodyeditor.models.PolygonModel;
 import aurelienribon.bodyeditor.models.RigidBodyModel;
 import aurelienribon.bodyeditor.models.ShapeModel;
+import aurelienribon.bodyeditor.models.ShapeVertice;
+
 import com.badlogic.gdx.math.Vector2;
+
+import java.util.List;
+
 import org.apache.commons.io.FilenameUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +22,10 @@ import org.json.JSONStringer;
  * @author Aurelien Ribon | http://www.aurelienribon.com
  */
 public class JsonIo {
+	private final static String SHAPE_FIELD_TYPE 		= "type";
+	private final static String SHAPE_FIELD_VALUE 		= "value";
+	private final static String SHAPE_FIELD_VELOCITY 	= "velocity";
+	
 	public static String serialize() throws JSONException {
 		JSONStringer json = new JSONStringer();
 		json.object();
@@ -54,8 +63,23 @@ public class JsonIo {
 				json.object();
 				json.key("type").value(shape.getType());
 				json.key("vertices").array();
-				for (Vector2 vertex : shape.getVertices())
-					json.object().key("x").value(vertex.x).key("y").value(vertex.y).endObject();
+				for (ShapeVertice dVertice : shape.getDetailVertices()) {
+					json.object()
+						.key("x").value(dVertice.vertex.x)
+						.key("y").value(dVertice.vertex.y);
+					// Optional fields
+					if(dVertice.type != null) {
+						json.key(SHAPE_FIELD_TYPE).value(dVertice.type);
+					}
+					if(dVertice.value != null) {
+						json.key(SHAPE_FIELD_VALUE).value(dVertice.value);
+					}
+					if(dVertice.velocity != null) {
+						json.key(SHAPE_FIELD_VELOCITY).value(dVertice.velocity);
+					}
+					json.endObject();
+				}
+				
 				json.endArray();
 				json.endObject();
 			}
@@ -135,11 +159,23 @@ public class JsonIo {
 				model.getShapes().add(shape);
 
 				JSONArray verticesElem = shapeElem.getJSONArray("vertices");
+				List<ShapeVertice> dVertices = shape.getDetailVertices();
 				for (int iii=0; iii<verticesElem.length(); iii++) {
 					JSONObject vertexElem = verticesElem.getJSONObject(iii);
-					shape.getVertices().add(new Vector2(
-						(float) vertexElem.getDouble("x"),
-						(float) vertexElem.getDouble("y")));
+					Double value = JsonHelper.getDouble(vertexElem, SHAPE_FIELD_VALUE, null);
+					Double velocity = JsonHelper.getDouble(vertexElem, SHAPE_FIELD_VELOCITY, null);
+					ShapeVertice dVert = new ShapeVertice(
+							new Vector2(
+								(float) vertexElem.getDouble("x"),
+								(float) vertexElem.getDouble("y")
+							),
+							JsonHelper.getString(vertexElem, SHAPE_FIELD_TYPE, null),
+							(value != null)? value.floatValue() : null,
+							(velocity != null)? velocity.floatValue() : null
+							
+					);
+					
+					dVertices.add(dVert);
 				}
 
 				shape.close();
