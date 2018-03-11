@@ -1,8 +1,12 @@
 package aurelienribon.bodyeditor.ui;
 
 import aurelienribon.bodyeditor.Settings;
+
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -49,6 +53,11 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
         drawShapeChk = new javax.swing.JCheckBox();
         enableSnapToGridChk = new javax.swing.JCheckBox();
         debugPhysicsChk = new javax.swing.JCheckBox();
+        // for vertex
+        vertexType = new javax.swing.JTextField();
+        vertexValue = new javax.swing.JTextField();
+        vertexVelocity = new javax.swing.JTextField();
+        //
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(2000, 0), new java.awt.Dimension(32767, 32767));
 
         setOpaque(false);
@@ -85,6 +94,24 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
         debugPhysicsChk.setText("Debug physics");
         debugPhysicsChk.setFocusable(false);
         debugPhysicsChk.setOpaque(false);
+        
+        vertexType.setEditable(true);
+        vertexType.setFocusable(true);
+        vertexType.setMinimumSize(new Dimension(90, 40));
+        vertexType.setText("type");
+        JLabel typeLabel = new JLabel("Type");
+        
+        vertexValue.setEditable(true);
+        vertexValue.setFocusable(true);
+        vertexValue.setMinimumSize(new Dimension(90, 40));
+        vertexValue.setText("value");
+        JLabel valueLabel = new JLabel("Value");
+        
+        vertexVelocity.setEditable(true);
+        vertexVelocity.setFocusable(true);
+        vertexVelocity.setMinimumSize(new Dimension(90, 40));
+        vertexVelocity.setText("velocity");
+        JLabel velocityLabel = new JLabel("Velocity");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -106,6 +133,24 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
                         .addComponent(drawGridChk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(gridGapSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    		.addComponent(typeLabel)
+                    		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(vertexType))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    		.addComponent(valueLabel)
+                    		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(vertexValue)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    		.addComponent(velocityLabel)
+                    		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(vertexVelocity)))
+                    
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -126,7 +171,21 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(drawShapeChk)
-                            .addComponent(debugPhysicsChk))))
+                            .addComponent(debugPhysicsChk)))
+                    
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            		.addComponent(typeLabel)
+                                    .addComponent(vertexType))
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            		.addComponent(valueLabel)
+                                    .addComponent(vertexValue)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            		.addComponent(velocityLabel)
+                                    .addComponent(vertexVelocity)))
+                    
+                )
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -142,6 +201,11 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox drawPolysChk;
     private javax.swing.JCheckBox drawShapeChk;
     private javax.swing.JCheckBox enableSnapToGridChk;
+    // for vertex
+    private javax.swing.JTextField vertexType;
+    private javax.swing.JTextField vertexValue;
+    private javax.swing.JTextField vertexVelocity;
+    //
     private javax.swing.Box.Filler filler1;
     private javax.swing.JSpinner gridGapSpinner;
     private javax.swing.JPanel jPanel6;
