@@ -20,24 +20,24 @@ public class ShapeModel {
 	public ShapeModel(Type type) {
 		this.type = type;
 	}
-	
+
 	public List<ShapeVertice> getDetailVertices() {
 		return vertices;
 	}
-	
+
 	private List<Vector2> detailVerticesToVertices() {
 		List<Vector2> retList = new ArrayList<>();
 		for(ShapeVertice dVertice : vertices) {
 			retList.add(dVertice.vertex);
 		}
-		
+
 		return retList;
 	}
-	
+
 	public List<Vector2> getVertices() {
 		return detailVerticesToVertices();
 	}
-	
+
 	public void addVertex(int index, Vector2 element) {
 		vertices.add(
 				index,
@@ -49,26 +49,26 @@ public class ShapeModel {
 				)
 		);
 	}
-	
+
 	public boolean containVertex(Vector2 vertex) {
 		for(ShapeVertice dVertice : vertices) {
 			if(dVertice.vertex.equals(vertex)) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	public void removeVertex(Vector2 vertex) {
 		List<ShapeVertice> toRemove = new ArrayList<>();
-		
+
 		for(ShapeVertice dVertice : vertices) {
 			if(dVertice.vertex.equals(vertex)) {
 				toRemove.add(dVertice);
 			}
 		}
-		
+
 		for(ShapeVertice dVertice : toRemove) {
 			vertices.remove(dVertice);
 		}

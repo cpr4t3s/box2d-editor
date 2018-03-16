@@ -15,6 +15,7 @@ import aurelienribon.bodyeditor.models.CircleModel;
 import aurelienribon.bodyeditor.models.PolygonModel;
 import aurelienribon.bodyeditor.models.RigidBodyModel;
 import aurelienribon.bodyeditor.models.ShapeModel;
+import aurelienribon.bodyeditor.models.ShapeVertice;
 import aurelienribon.bodyeditor.ui.AutoTraceParamsDialog;
 import aurelienribon.bodyeditor.utils.ShapeUtils;
 import aurelienribon.tweenengine.BaseTween;
@@ -45,6 +46,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -209,9 +211,94 @@ public class RigidBodiesScreen {
 		});
 	}
 
+	private String tryGetVertexTypePropertie() {
+		String type = Ctx.rigidBodiesOptionsPanel.getVertexType();
+		if(type.length() > 0) {
+			return type;
+		}
+		
+		return null;
+	}
+
+	private Float tryGetVertexValuePropertie() {
+		try {
+			return Float.valueOf(Ctx.rigidBodiesOptionsPanel.getVertexValue());
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private Float tryGetVertexVelocityPropertie() {
+		try {
+			return Float.valueOf(Ctx.rigidBodiesOptionsPanel.getVertexVelocity());
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private List<ShapeVertice> getAllVertexesDetails() {
+		List<ShapeVertice> points = new ArrayList<ShapeVertice>();
+		RigidBodyModel model = Ctx.bodies.getSelectedModel();
+
+		for (ShapeModel shape : model.getShapes()) {
+			points.addAll(shape.getDetailVertices());
+		}
+
+		points.add(model.getOriginDetail());
+		return Collections.unmodifiableList(points);
+	}
+
+	private void trySetVertexOptions() {
+		// only get properties if there is just one vertex selected
+		if(selectedPoints.size() > 1) {
+			return;
+		}
+
+		List<ShapeVertice> allVertexes = getAllVertexesDetails();
+		for(ShapeVertice vertex : allVertexes) {
+			if(vertex.vertex.equals(selectedPoints.get(0))) {
+				Ctx.rigidBodiesOptionsPanel.setVertexType(vertex.type);
+				Ctx.rigidBodiesOptionsPanel.setVertexValue(
+						(vertex.value != null)? String.valueOf(vertex.value) : ""
+				);
+				Ctx.rigidBodiesOptionsPanel.setVertexVelocity(
+						(vertex.velocity != null)? String.valueOf(vertex.velocity) : ""
+				);
+				return;
+			}
+		}
+	}
+
+	private void trySetVertexOptions(List<Vector2> removed) {
+		List<ShapeVertice> allVertexes = getAllVertexesDetails();
+
+		for(Vector2 point : removed) {
+			for(ShapeVertice vertex : allVertexes) {
+				if(vertex.vertex.equals(point)) {
+					vertex.type = tryGetVertexTypePropertie();
+					vertex.value = tryGetVertexValuePropertie();
+					vertex.velocity = tryGetVertexVelocityPropertie();
+				}
+			}
+		}
+		Ctx.rigidBodiesOptionsPanel.clearVertexProperties();
+	}
+
+	int lastSize = 0;
 	private void initializeSelectedPointsEvents() {
 		selectedPoints.addListChangedListener(new ObservableList.ListChangeListener<Vector2>() {
 			@Override public void changed(Object source, List<Vector2> added, List<Vector2> removed) {
+				if(selectedPoints.size() == 1) {
+					lastSize = selectedPoints.size();
+					trySetVertexOptions();
+				} else if(lastSize == 1 && selectedPoints.size() == 0) {
+					lastSize = 0;
+					trySetVertexOptions(removed);
+				} else {
+					lastSize = selectedPoints.size();
+					Ctx.rigidBodiesOptionsPanel.clearVertexProperties();
+				}
+
 				RigidBodyModel model = Ctx.bodies.getSelectedModel();
 				if (model == null) return;
 

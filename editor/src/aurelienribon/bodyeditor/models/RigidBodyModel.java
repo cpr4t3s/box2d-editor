@@ -16,7 +16,7 @@ public class RigidBodyModel extends ChangeableObject {
 	public static final String PROP_IMAGEPATH = "imagePath";
 	public static final String PROP_PHYSICS = "physics";
 
-	private final Vector2 origin = new Vector2(0, 0);
+	private final ShapeVertice origin = new ShapeVertice(new Vector2(0, 0), null, null, null);
 	private final List<ShapeModel> shapes = new ArrayList<ShapeModel>();
 	private final List<PolygonModel> polygons = new ArrayList<PolygonModel>();
 	private final List<CircleModel> circles = new ArrayList<CircleModel>();
@@ -25,6 +25,10 @@ public class RigidBodyModel extends ChangeableObject {
 	private boolean isImagePathValid = true;
 
 	public Vector2 getOrigin() {
+		return origin.vertex;
+	}
+	
+	public ShapeVertice getOriginDetail() {
 		return origin;
 	}
 

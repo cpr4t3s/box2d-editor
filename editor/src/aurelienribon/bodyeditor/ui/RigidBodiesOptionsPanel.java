@@ -35,7 +35,37 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
 		Settings.isSnapToGridEnabled = enableSnapToGridChk.isSelected();
 		Settings.gridGap = (Float) gridGapSpinner.getValue();
 	}
+	
+	public void clearVertexProperties() {
+		vertexType.setText("");
+        vertexValue.setText("");
+        vertexVelocity.setText("");
+	}
 
+	public String getVertexType() {
+		return vertexType.getText();
+	}
+	
+	public String getVertexValue() {
+		return vertexValue.getText();
+	}
+	
+	public String getVertexVelocity() {
+		return vertexVelocity.getText();
+	}
+	
+	public void setVertexType(String type) {
+		vertexType.setText(type);
+	}
+	
+	public void setVertexValue(String value) {
+		vertexValue.setText(value);
+	}
+	
+	public void setVertexVelocity(String velocity) {
+		vertexVelocity.setText(velocity);
+	}
+	
 	// -------------------------------------------------------------------------
 	// Generated Stuff
 	// -------------------------------------------------------------------------
@@ -94,23 +124,20 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
         debugPhysicsChk.setText("Debug physics");
         debugPhysicsChk.setFocusable(false);
         debugPhysicsChk.setOpaque(false);
-        
+
         vertexType.setEditable(true);
         vertexType.setFocusable(true);
-        vertexType.setMinimumSize(new Dimension(90, 40));
-        vertexType.setText("type");
+        vertexType.setMinimumSize(new Dimension(150, 30));
         JLabel typeLabel = new JLabel("Type");
-        
+
         vertexValue.setEditable(true);
         vertexValue.setFocusable(true);
-        vertexValue.setMinimumSize(new Dimension(90, 40));
-        vertexValue.setText("value");
+        vertexValue.setMinimumSize(new Dimension(90, 30));
         JLabel valueLabel = new JLabel("Value");
-        
+
         vertexVelocity.setEditable(true);
         vertexVelocity.setFocusable(true);
         vertexVelocity.setMinimumSize(new Dimension(90, 40));
-        vertexVelocity.setText("velocity");
         JLabel velocityLabel = new JLabel("Velocity");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);

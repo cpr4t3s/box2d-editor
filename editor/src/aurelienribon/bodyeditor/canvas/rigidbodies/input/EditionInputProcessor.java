@@ -47,7 +47,9 @@ public class EditionInputProcessor extends InputAdapter {
 				screen.selectedPoints.clear();
 			} else if (InputHelper.isCtrlDown()) {
 				if (screen.selectedPoints.contains(draggedPoint)) screen.selectedPoints.remove(draggedPoint);
-				else screen.selectedPoints.add(draggedPoint);
+				else {
+					screen.selectedPoints.add(draggedPoint);
+				}
 			} else if (!screen.selectedPoints.contains(draggedPoint)) {
 				screen.selectedPoints.replaceBy(draggedPoint);
 			}
@@ -73,7 +75,9 @@ public class EditionInputProcessor extends InputAdapter {
 			if (InputHelper.isCtrlDown()) {
 				for (Vector2 p : getPointsInSelection()) {
 					if (screen.selectedPoints.contains(p)) screen.selectedPoints.remove(p);
-					else screen.selectedPoints.add(p);
+					else {
+						screen.selectedPoints.add(p);
+					}
 				}
 			} else {
 				screen.selectedPoints.replaceBy(getPointsInSelection());

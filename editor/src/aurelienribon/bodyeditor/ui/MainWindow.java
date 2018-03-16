@@ -158,7 +158,6 @@ public class MainWindow extends javax.swing.JFrame {
         versionLabel = new javax.swing.JLabel();
         renderPanel = new javax.swing.JPanel();
         optionsPanel = new javax.swing.JPanel();
-        rigidBodiesOptionsPanel1 = new aurelienribon.bodyeditor.ui.RigidBodiesOptionsPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Physics Body Editor");
@@ -227,7 +226,7 @@ public class MainWindow extends javax.swing.JFrame {
         renderPanel.setLayout(new java.awt.BorderLayout());
 
         optionsPanel.setLayout(new java.awt.CardLayout());
-        optionsPanel.add(rigidBodiesOptionsPanel1, "card2");
+        optionsPanel.add(Ctx.rigidBodiesOptionsPanel, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,7 +267,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel optionsPanel;
     private aurelienribon.bodyeditor.ui.ProjectPanel projectPanel;
     private javax.swing.JPanel renderPanel;
-    private aurelienribon.bodyeditor.ui.RigidBodiesOptionsPanel rigidBodiesOptionsPanel1;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JLabel versionLabel;
     private javax.swing.JPanel versionPanel;

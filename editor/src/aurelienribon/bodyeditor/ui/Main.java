@@ -32,7 +32,7 @@ public class Main {
 
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				mw.setSize(
-					Math.min(1150, screenSize.width - 100),
+					Math.min(1480, screenSize.width - 100),
 					Math.min(800, screenSize.height - 100)
 				);
 
