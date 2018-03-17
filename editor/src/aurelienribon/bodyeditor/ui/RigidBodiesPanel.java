@@ -22,12 +22,15 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -217,18 +220,51 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
 			upBtn.setEnabled(pred);
 			downBtn.setEnabled(pred);
 
-			list.removeListSelectionListener(listSelectionListener);
-			if (pred) list.setSelectedValue(model, true);
-			else list.clearSelection();
-			list.addListSelectionListener(listSelectionListener);
+//			list.removeListSelectionListener(listSelectionListener);
+//			if (pred) list.setSelectedValue(model, true);
+//			else list.clearSelection();
+//			list.addListSelectionListener(listSelectionListener);
 		}
 	};
+	
+    /**
+     * Returns a list of all the selected items, in which the first element is the last selected
+     * element
+     */
+    public List<RigidBodyModel> getOrderedSelectedValuesList() {
+        ListSelectionModel sm = list.getSelectionModel();
+        ListModel<RigidBodyModel> dm = list.getModel();
+
+        int iMin = sm.getMinSelectionIndex();
+        int iMax = sm.getMaxSelectionIndex();
+
+        if ((iMin < 0) || (iMax < 0)) {
+            return Collections.emptyList();
+        }
+
+        List<RigidBodyModel> selectedItems = new ArrayList<RigidBodyModel>();
+        int lastSelectedIdx = list.getAnchorSelectionIndex();
+        RigidBodyModel lastSelectedModel = null;
+        for(int i = iMin; i <= iMax; i++) {
+        	if(i == lastSelectedIdx) {
+        		lastSelectedModel = dm.getElementAt(i);
+        	}
+        	else if (sm.isSelectedIndex(i)) {
+                selectedItems.add(dm.getElementAt(i));
+            }
+        }
+        selectedItems.add(0, lastSelectedModel);
+        
+        return selectedItems;
+    }
+
 
 	private final ListSelectionListener listSelectionListener = new ListSelectionListener() {
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			if (e.getValueIsAdjusting()) return;
-			Ctx.bodies.selectMultiple((List<RigidBodyModel>) list.getSelectedValuesList());
+
+			Ctx.bodies.selectMultiple(getOrderedSelectedValuesList());
 		}
 	};
 
