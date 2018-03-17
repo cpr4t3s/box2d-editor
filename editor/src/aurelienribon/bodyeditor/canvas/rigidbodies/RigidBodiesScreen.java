@@ -644,7 +644,7 @@ public class RigidBodiesScreen {
 		for (Vector2[] polygon : polygons) {
 			if (polygon.length < 3) continue;
 			ShapeModel shape = new ShapeModel(ShapeModel.Type.POLYGON);
-			shape.getVertices().addAll(Arrays.asList(polygon));
+			shape.addAll(Arrays.asList(polygon));
 			shape.close();
 			model.getShapes().add(shape);
 		}

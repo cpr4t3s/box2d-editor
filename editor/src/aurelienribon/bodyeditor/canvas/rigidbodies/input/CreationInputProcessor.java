@@ -40,7 +40,7 @@ public class CreationInputProcessor extends InputAdapter {
 		if (lastShape == null || lastShape.isClosed()) {
 			ShapeModel.Type type = InputHelper.isCtrlDown() ? ShapeModel.Type.CIRCLE : ShapeModel.Type.POLYGON;
 			lastShape = new ShapeModel(type);
-			lastShape.getVertices().add(canvas.alignedScreenToWorld(x, y));
+			lastShape.addVertex(canvas.alignedScreenToWorld(x, y));
 			shapes.add(lastShape);
 
 		} else {
@@ -53,12 +53,12 @@ public class CreationInputProcessor extends InputAdapter {
 				model.computePhysics();
 				screen.buildBody();
 			} else if (type == ShapeModel.Type.CIRCLE) {
-				vs.add(canvas.alignedScreenToWorld(x, y));
+				lastShape.addVertex(canvas.alignedScreenToWorld(x, y));
 				lastShape.close();
 				model.computePhysics();
 				screen.buildBody();
 			} else {
-				vs.add(canvas.alignedScreenToWorld(x, y));
+				lastShape.addVertex(canvas.alignedScreenToWorld(x, y));
 			}
 		}
 

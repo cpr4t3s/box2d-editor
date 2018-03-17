@@ -49,6 +49,23 @@ public class ShapeModel {
 				)
 		);
 	}
+	
+	public void addVertex(Vector2 element) {
+		vertices.add(
+				new ShapeVertice(
+						element,
+						null,
+						null,
+						null
+				)
+		);
+	}
+	
+	public void addAll(List<Vector2> vertices) {
+		for(Vector2 v : vertices) {
+			addVertex(v);
+		}
+	}
 
 	public boolean containVertex(Vector2 vertex) {
 		for(ShapeVertice dVertice : vertices) {
